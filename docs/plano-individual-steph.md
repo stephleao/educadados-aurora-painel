@@ -1,8 +1,18 @@
 # Plano de execução individual — Painel Aurora - Steph
 
-Este planejamento usa **23 Issues individuais**, com prefixo `[Steph]`, atribuídas a `stephleao`. O projeto pessoal **Painel Aurora - Steph** é separado do projeto da squad. As cópias têm progresso independente.
+Este planejamento usa **23 Issues individuais**, sem prefixo pessoal nos títulos e **sem atribuição de responsável**. O projeto GitHub **Painel Aurora - Steph** é separado do quadro da squad, e suas Issues são cópias independentes das tarefas coletivas. Elas podem ser identificadas pela etiqueta `individual:Steph`.
 
 > O planejamento de 04 a 07/11 foi elaborado para **cinco pessoas**. Sozinha, executar os **58 pontos** até 07/11 é um risco elevado. As ondas a seguir representam a **sequência por dependências**, não prazos garantidos.
+
+## Organização do trabalho individual
+
+- **Projeto:** Painel Aurora - Steph (GitHub Projects separado do projeto Painel Aurora da squad).
+- **Branch de desenvolvimento:** `steph` (ainda não renomeada para `steph-ind`).
+- **Referência dos requisitos:** [Documento ajustado de tarefas da Fase 1](tarefas-desafio-fase-01.md).
+- **Issues individuais:** [ver as 23 tarefas com etiqueta `individual:Steph`](https://github.com/stephleao/educadados-aurora-painel/issues?q=is%3Aopen+is%3Aissue+label%3Aindividual%3ASteph).
+- **Identificação das etapas:** etiquetas `solo:onda-1` a `solo:onda-6`, além de prioridade, dificuldade e esforço.
+- **Responsáveis:** não atribuídos nas Issues individuais, pois o projeto pessoal já contextualiza a execução.
+- **Arquivos de trabalho:** manter PBIX e arquivos de desenvolvimento em pasta pessoal, sem sobrescrever os da squad. A [pasta compartilhada da equipe](https://drive.google.com/drive/folders/1ImPkDwLwbxaNvFR_UZ92ou28MN97AtDQ) permanece como referência.
 
 ## Ordem recomendada
 
@@ -58,6 +68,14 @@ A Issue **#35** foi criada por engano como duplicata da F01-10. Está fechada co
 - Usar o [Drive da squad](https://drive.google.com/drive/folders/1ImPkDwLwbxaNvFR_UZ92ou28MN97AtDQ) como referência; guardar seus arquivos de desenvolvimento em subpasta pessoal para não sobrescrever o PBIX compartilhado.
 - Seguir as regras técnicas do [documento ajustado](tarefas-desafio-fase-01.md), especialmente a separação das quatro metas e o tratamento de “sem meta”.
 
-## Adicionar as cópias ao projeto certo
+## Projetos, branches e visibilidade
 
-Os cartões precisam ser adicionados ao **GitHub Project separado** chamado `Painel Aurora - Steph`. Nunca adicionar as 23 Issues originais da squad como se fossem suas cópias. O script [scripts/adicionar-ao-projeto-steph.ps1](../scripts/adicionar-ao-projeto-steph.ps1) seleciona o projeto **pelo título exato** e adiciona somente as 23 Issues individuais. Precisa ser executado localmente com GitHub CLI autenticado; os campos/status do quadro podem requerer configuração no GitHub.
+As 23 Issues individuais **já foram adicionadas manualmente ao projeto Painel Aurora - Steph**. Não é necessário instalar GitHub CLI ou executar scripts para vinculá-las.
+
+O repositório é **público**: suas Issues e os arquivos da branch `steph` são visíveis mesmo quando o GitHub Project pessoal é privado. A privacidade do quadro não torna suas Issues privadas. Isso é conhecido e aceitável para o acompanhamento atual.
+
+O `README.md` compartilhado permanece idêntico nas branches `main` e `steph`; as informações individuais ficam exclusivamente neste arquivo.
+
+**Antes de um merge para `main`:** confira quais arquivos serão integrados. Embora este documento só exista na branch `steph` agora, um merge normal pode adicioná-lo à `main`. Se quiser manter a documentação individual fora da branch da squad, exclua este arquivo das alterações que serão integradas.
+
+A Issue **#35** é uma duplicata fechada da F01-10 e não integra as 23 tarefas válidas. Não interpretá-la como trabalho concluído.
