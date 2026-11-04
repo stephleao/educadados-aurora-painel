@@ -31,4 +31,20 @@ foreach ($number in $issueNumbers) {
         Write-Warning "Nao foi possivel adicionar #$number (talvez ja esteja no projeto). Confira o quadro."
     }
 }
+# Limpeza pontual: remove do projeto pessoal a duplicata erroneamente criada (#35), se aparecer.
+# Nao exclui a Issue do repositorio, nao mexe no projeto da squad.
+$itemsJson = gh project item-list $projectNumber --owner $owner --format json --limit 200
+if ($LASTEXITCODE -eq 0) {
+    $items = $itemsJson | ConvertFrom-Json
+    $duplicatas = @($items.items | Where-Object {
+        $_.content.url -eq "https://github.com/$owner/$repo/issues/35"
+    })
+    foreach ($duplicata in $duplicatas) {
+        Write-Host "Removendo item duplicado #35 do projeto pessoal..." -ForegroundColor Yellow
+        gh project item-delete $projectNumber --owner $owner --id $duplicata.id
+    }
+} else {
+    Write-Warning "Nao foi possivel verificar a duplicata #35 automaticamente. Confira a coluna Done manualmente."
+}
+
 Write-Host "Verifique o projeto '$targetTitle'. Mantenha apenas Issues com prefixo [Steph] e nao adicione a #35." -ForegroundColor Green
