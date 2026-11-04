@@ -21,9 +21,8 @@ As tarefas são Issues `F01-01` a `F01-23`. O [Kanban Painel Aurora](https://git
 ## Acompanhamento individual — Steph
 - **[Plano solo por dependências (58 pontos)](docs/plano-individual-steph.md)**
 - [Issues individuais (23 tarefas com prefixo Steph)](https://github.com/stephleao/educadados-aurora-painel/issues?q=is%3Aopen+is%3Aissue+label%3Aindividual%3ASteph)
-- [Script para incluir as Issues no projeto *Painel Aurora - Steph*](scripts/adicionar-ao-projeto-steph.ps1)
 
-O **Painel Aurora - Steph** é um GitHub Project **separado** do projeto da squad. As Issues individuais têm seu próprio progresso e usam etiquetas `solo:onda-1` a `solo:onda-6`. A Issue #35 é uma duplicata fechada e não deve entrar no quadro.
+O **Painel Aurora - Steph** é um GitHub Project **separado** do projeto da squad. As Issues individuais têm seu próprio progresso e usam etiquetas `solo:onda-1` a `solo:onda-6`. A Issue #35 é uma duplicata fechada e não deve entrar no quadro. Este material pessoal está organizado na branch `steph`, separada da documentação compartilhada em `main`.
 
 ## Arquivos
 Planilhas originais e arquivos `.pbix` devem ficar na pasta compartilhada da equipe (Google Drive/OneDrive), **não neste repositório**. A pasta da squad já está definida; verificar as permissões de compartilhamento com os integrantes.
