@@ -1,27 +1,32 @@
 # F01-04 | Verificação da qualidade e dos tipos de dados
 
 **Projeto:** Painel Aurora — Fase 1  
-**Escopo:** 11 tabelas importadas no Power Query.
+**Escopo:** 11 tabelas importadas para o Power BI.
 
-## Verificações realizadas
+## 1. Verificações realizadas
 
-- Tipos de dados conferidos, com ajustes nas colunas de data e nos campos de Sim/Não (convertidos para tipo lógico, `true/false`).
-- Na tabela `calendario`, `mes_ano` e `ano_mes` foram alteradas para Texto.
-- Inspeção de erros e valores nulos nas 11 tabelas. **Nenhum erro foi identificado na verificação realizada.**
+- Inspeção das 11 tabelas, utilizando o Google Sheets para verificar valores nulos, possíveis erros e inconsistências.
+- Conferência dos tipos de dados e ajustes necessários na importação pelo Power Query.
+- Conversão das colunas de data para o tipo Data e dos campos Sim/Não para o tipo Lógico (`true/false`).
+- Nenhum erro foi identificado durante as inspeções.
 
-## Achados e tratamento
+## 2. Achados e tratamentos
 
-| Tabela | Achado | Tratamento / decisão |
+| Tabela | Achado | Tratamento |
 |---|---|---|
-| `calendario` | Valores nulos em coluna(s) da tabela; coluna(s) não especificada(s) no registro da inspeção | Mantidos; conferir se correspondem a `nome_feriado_nacional`, cujo vazio é esperado em dias sem feriado. Se houver nulos em `data`, investigar. |
-| `filiais` | Linhas inteiramente vazias | Linhas vazias removidas no Power Query. |
-| `metas_valor` | Das quatro colunas `codigo_grupo_servico`, `codigo_servico`, `codigo_vendedor` e `codigo_profissional`, apenas a correspondente a `nivel` fica preenchida em cada registro | Nulos legítimos, preservados. |
-| `metas_quantidade` | Mesmo padrão de preenchimento condicionado a `nivel` | Nulos legítimos, preservados. |
+| `calendario` | Conversão automática inadequada dos tipos de dados | Tabela importada novamente, com a conversão automática removida e os tipos configurados manualmente. |
+| `calendario` | Valores nulos em campos de feriados | Nulos preservados, pois são esperados em dias sem feriado. |
+| `filiais` | Linhas completamente vazias | Linhas removidas. |
+| `filiais` | Valores nulos em `data_encerramento` | Preservados, pois filiais ativas não possuem data de encerramento. |
+| `metas_valor` | Nulos nas quatro colunas `codigo_*` associadas ao nível da meta | Preservados, pois apenas a coluna correspondente ao `nivel` deve estar preenchida. |
+| `metas_quantidade` | Mesmo comportamento de preenchimento conforme o `nivel` | Nulos preservados. |
 
-## Pontos de conferência antes de finalizar
+## 3. Resultado
 
-- Verificar se `calendario[mes_ano]` contém rótulos como `Jan/2024` e `calendario[ano_mes]` valores como `2024-01`, **e não textos de datas** como `01/01/2024`. Mudar apenas o tipo para Texto não restaura automaticamente o formato original.
-- Confirmar que a etapa de remoção em `filiais` excluiu **somente linhas inteiramente vazias** e não filiais com campos opcionais nulos.
-- Após **Fechar e Aplicar**, conferir que as 11 tabelas carregam sem erros.
+- As 11 tabelas foram inspecionadas.
+- Os tipos de dados foram revisados e ajustados.
+- As linhas completamente vazias identificadas foram removidas.
+- Os valores nulos legítimos foram preservados.
+- Nenhum erro foi identificado nas inspeções realizadas.
 
-**Situação:** inspeção e tratamento relatados; os pontos de conferência acima permanecem para validação final da F01-04.
+**Status:** inspeção e tratamentos concluídos. Dados preparados para a etapa de modelagem.
