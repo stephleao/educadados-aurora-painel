@@ -27,5 +27,5 @@ SUM(itens_venda[valor_total])
 -- Finalidade: Somar o valor líquido das vendas, já considerando descontos.
 -- Tabela de origem: vendas
 -- Contexto de filtro: período, filial, vendedor e profissional.
-Valor Líquido de Vendas =
+Valor Líquido =
 SUM(vendas[valor_liquido])
