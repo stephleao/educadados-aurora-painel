@@ -74,3 +74,87 @@ DIVIDE([Valor Bruto de Itens], [Meta Valor Serviço])
 
 % Atingimento Quantidade Serviço =
 DIVIDE([Quantidade de Itens], [Meta Quantidade Serviço])
+
+-- ==================================================
+-- F01-12 | Status, cores e rótulos combinados
+-- Projeto: Painel Aurora - Fase 1
+-- Responsável: Steph
+-- Tabela inicial no Power BI: _Medidas
+--
+-- Finalidade: identificar atingimento de metas,
+-- fornecer cores para formatação condicional
+-- e combinar valor e quantidade nos rótulos.
+-- Contexto: mês, filial e cidade.
+
+
+-- STATUS
+
+Status Valor Filial =
+VAR Meta = [Meta Valor Filial]
+VAR Realizado = [Valor Líquido]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(Meta) || Meta = 0, "sem meta",
+    Realizado >= Meta, "Acima ou na meta",
+    "Abaixo da meta"
+)
+
+Status Valor Cidade =
+VAR Meta = [Meta Valor Cidade]
+VAR Realizado = [Valor Líquido]
+RETURN
+SWITCH(
+    TRUE(),
+    ISBLANK(Meta) || Meta = 0, "sem meta",
+    Realizado >= Meta, "Acima ou na meta",
+    "Abaixo da meta"
+)
+
+
+-- CORES
+-- Preto: na meta ou acima.
+-- Vermelho: abaixo da meta.
+-- Azul acinzentado: sem meta.
+
+Cor Valor Filial =
+SWITCH(
+    [Status Valor Filial],
+    "sem meta", "#5B7580",
+    "Abaixo da meta", "#D32F2F",
+    "#000000"
+)
+
+Cor Valor Cidade =
+SWITCH(
+    [Status Valor Cidade],
+    "sem meta", "#5B7580",
+    "Abaixo da meta", "#D32F2F",
+    "#000000"
+)
+
+
+-- RÓTULO COMBINADO
+-- Valor líquido e número de vendas.
+-- Não exibe rótulo incompleto quando ambos estão vazios.
+
+Rótulo Valor e Quantidade =
+VAR Valor = [Valor Líquido]
+VAR Quantidade = [Número de Vendas]
+RETURN
+IF(
+    ISBLANK(Valor) && ISBLANK(Quantidade),
+    BLANK(),
+    FORMAT(Valor, "R$ #,##0", "pt-BR")
+        & " | Qtd "
+        & FORMAT(Quantidade, "#,##0", "pt-BR")
+)
+
+
+-- VALIDAÇÕES
+-- Testes realizados por filial e cidade.
+-- Status e códigos de cores retornaram conforme
+-- o contexto de meta.
+-- Rótulos exibiram valor e quantidade.
+-- Ajuste para rótulo vazio aplicado no PBIX.
+-- Aplicação das cores nos visuais finais pendente.
