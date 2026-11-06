@@ -99,3 +99,86 @@ CALCULATE(
     SUM(metas_quantidade[meta_quantidade]),
     metas_quantidade[nivel] = "Profissional"
 )
+
+-- ==================================================
+-- F01-10 | Metas consolidadas
+-- Projeto: Painel Aurora - Fase 1
+-- Responsável: Steph
+-- Tabela inicial no Power BI: _Medidas
+--
+-- Filial: valor do nível Produto e quantidade
+-- do nível Vendedor.
+-- Cidade: soma das metas de suas filiais.
+-- Rede: soma das metas de todas as filiais.
+-- Metas consolidadas ignoram filtros de outros
+-- cortes, preservando o contexto de período.
+
+
+-- FILIAL
+-- Origem: medidas da F01-09.
+-- Contexto: mês, filial e cidade.
+-- REMOVEFILTERS evita interferência de filtros
+-- de grupo, serviço, vendedor e profissional.
+
+Meta Valor Filial =
+CALCULATE(
+    [Meta Valor Produto],
+    REMOVEFILTERS(grupos_servico),
+    REMOVEFILTERS(servicos),
+    REMOVEFILTERS(vendedores),
+    REMOVEFILTERS(profissionais)
+)
+
+Meta Quantidade Filial =
+CALCULATE(
+    [Meta Quantidade Vendedor],
+    REMOVEFILTERS(grupos_servico),
+    REMOVEFILTERS(servicos),
+    REMOVEFILTERS(vendedores),
+    REMOVEFILTERS(profissionais)
+)
+
+
+-- CIDADE
+-- Origem: medidas consolidadas de filial.
+-- Contexto: mês e cidade selecionada.
+-- SUMX soma as metas das filiais da cidade.
+
+Meta Valor Cidade =
+SUMX(
+    VALUES(filiais[codigo_filial]),
+    CALCULATE([Meta Valor Filial])
+)
+
+Meta Quantidade Cidade =
+SUMX(
+    VALUES(filiais[codigo_filial]),
+    CALCULATE([Meta Quantidade Filial])
+)
+
+
+-- REDE
+-- Origem: medidas consolidadas de filial.
+-- Contexto: mês, considerando todas as filiais.
+-- ALL(filiais) remove filtros da tabela de filiais.
+
+Meta Valor Rede =
+SUMX(
+    ALL(filiais),
+    CALCULATE([Meta Valor Filial])
+)
+
+Meta Quantidade Rede =
+SUMX(
+    ALL(filiais),
+    CALCULATE([Meta Quantidade Filial])
+)
+
+
+-- VALIDAÇÕES REALIZADAS
+-- Setembro/2026:
+-- Metas de valor e quantidade da rede conferidas
+-- com as somas dos registros originais.
+-- Filtros de mês, filial e cidade testados.
+-- Filtros cruzados de grupo e vendedor testados.
+-- Resultados coerentes com as regras do desafio.
