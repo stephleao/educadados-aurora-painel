@@ -1,0 +1,31 @@
+-- F01-08 | Medidas base
+-- Projeto: Painel Aurora - Fase 1
+-- Responsáveis: Ketlen e Steph
+-- Status: Testadas no Power BI por mês e filial
+
+-- Finalidade: Somar a quantidade de itens vendidos.
+-- Tabela de origem: itens_venda
+-- Contexto de filtro: período, filial e dimensões relacionadas.
+Quantidade de Itens =
+SUM(itens_venda[quantidade])
+
+
+-- Finalidade: Contar as vendas sem duplicar códigos.
+-- Tabela de origem: vendas
+-- Contexto de filtro: período, filial, vendedor e profissional.
+Número de Vendas =
+DISTINCTCOUNT(vendas[codigo_venda])
+
+
+-- Finalidade: Somar o valor bruto dos itens, sem rateio de descontos.
+-- Tabela de origem: itens_venda
+-- Contexto de filtro: período, filial, grupo de serviço e serviço.
+Valor Bruto de Itens =
+SUM(itens_venda[valor_total])
+
+
+-- Finalidade: Somar o valor líquido das vendas, já considerando descontos.
+-- Tabela de origem: vendas
+-- Contexto de filtro: período, filial, vendedor e profissional.
+Valor Líquido de Vendas =
+SUM(vendas[valor_liquido])
