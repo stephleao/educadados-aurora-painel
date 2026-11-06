@@ -1,0 +1,101 @@
+-- F01-09 | Metas por nível
+-- Projeto: Painel Aurora - Fase 1
+-- Responsável: Steph
+-- Tabela inicial no Power BI: _Medidas
+--
+-- Os níveis Produto, Serviço, Vendedor e Profissional
+-- são independentes e não devem ser somados entre si.
+-- Medidas numéricas retornam BLANK() na ausência de meta.
+-- A exibição "sem meta" é configurada nos visuais.
+
+
+-- NÍVEL PRODUTO
+-- Finalidade: metas por grupo de serviço.
+-- Origem: metas_valor e metas_quantidade.
+-- Contexto: mês, filial e grupo de serviço.
+-- TREATAS aplica o filtro de grupo devido ao relacionamento
+-- direto inativo; CROSSFILTER evita interferência via serviço.
+
+Meta Valor Produto =
+CALCULATE(
+    SUM(metas_valor[meta_valor]),
+    metas_valor[nivel] = "Produto",
+    CROSSFILTER(
+        servicos[codigo_servico],
+        metas_valor[codigo_servico],
+        NONE
+    ),
+    TREATAS(
+        VALUES(grupos_servico[codigo_grupo_servico]),
+        metas_valor[codigo_grupo_servico]
+    )
+)
+
+Meta Quantidade Produto =
+CALCULATE(
+    SUM(metas_quantidade[meta_quantidade]),
+    metas_quantidade[nivel] = "Produto",
+    CROSSFILTER(
+        servicos[codigo_servico],
+        metas_quantidade[codigo_servico],
+        NONE
+    ),
+    TREATAS(
+        VALUES(grupos_servico[codigo_grupo_servico]),
+        metas_quantidade[codigo_grupo_servico]
+    )
+)
+
+
+-- NÍVEL SERVIÇO
+-- Finalidade: metas por serviço individual.
+-- Origem: metas_valor e metas_quantidade.
+-- Contexto: mês, filial e serviço.
+
+Meta Valor Serviço =
+CALCULATE(
+    SUM(metas_valor[meta_valor]),
+    metas_valor[nivel] = "Serviço"
+)
+
+Meta Quantidade Serviço =
+CALCULATE(
+    SUM(metas_quantidade[meta_quantidade]),
+    metas_quantidade[nivel] = "Serviço"
+)
+
+
+-- NÍVEL VENDEDOR
+-- Finalidade: metas por vendedor.
+-- Origem: metas_valor e metas_quantidade.
+-- Contexto: mês, filial e vendedor.
+
+Meta Valor Vendedor =
+CALCULATE(
+    SUM(metas_valor[meta_valor]),
+    metas_valor[nivel] = "Vendedor"
+)
+
+Meta Quantidade Vendedor =
+CALCULATE(
+    SUM(metas_quantidade[meta_quantidade]),
+    metas_quantidade[nivel] = "Vendedor"
+)
+
+
+-- NÍVEL PROFISSIONAL
+-- Finalidade: metas por profissional.
+-- Origem: metas_valor e metas_quantidade.
+-- Contexto: mês, filial e profissional.
+
+Meta Valor Profissional =
+CALCULATE(
+    SUM(metas_valor[meta_valor]),
+    metas_valor[nivel] = "Profissional"
+)
+
+Meta Quantidade Profissional =
+CALCULATE(
+    SUM(metas_quantidade[meta_quantidade]),
+    metas_quantidade[nivel] = "Profissional"
+)
