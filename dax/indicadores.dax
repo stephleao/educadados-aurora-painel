@@ -1,0 +1,76 @@
+-- F01-11 | Percentuais de atingimento
+-- Projeto: Painel Aurora - Fase 1
+-- Responsável: Steph
+-- Tabela inicial no Power BI: _Medidas
+--
+-- Finalidade: calcular atingimento de valor e quantidade
+-- nos sete cortes exigidos pelo desafio.
+-- Contexto: período e entidade do corte analisado.
+--
+-- DIVIDE retorna BLANK() quando a meta é zero
+-- ou inexistente, sem substituir ausência de meta por 0%.
+-- Exibição "sem meta": aplicar nos visuais finais.
+-- Conferência dos totais: F01-18.
+
+
+-- REDE
+
+% Atingimento Valor Rede =
+DIVIDE([Valor Líquido], [Meta Valor Rede])
+
+% Atingimento Quantidade Rede =
+DIVIDE([Número de Vendas], [Meta Quantidade Rede])
+
+
+-- FILIAL
+
+% Atingimento Valor Filial =
+DIVIDE([Valor Líquido], [Meta Valor Filial])
+
+% Atingimento Quantidade Filial =
+DIVIDE([Número de Vendas], [Meta Quantidade Filial])
+
+
+-- CIDADE
+
+% Atingimento Valor Cidade =
+DIVIDE([Valor Líquido], [Meta Valor Cidade])
+
+% Atingimento Quantidade Cidade =
+DIVIDE([Número de Vendas], [Meta Quantidade Cidade])
+
+
+-- VENDEDOR
+
+% Atingimento Valor Vendedor =
+DIVIDE([Valor Líquido], [Meta Valor Vendedor])
+
+% Atingimento Quantidade Vendedor =
+DIVIDE([Número de Vendas], [Meta Quantidade Vendedor])
+
+
+-- PROFISSIONAL
+
+% Atingimento Valor Profissional =
+DIVIDE([Valor Líquido], [Meta Valor Profissional])
+
+% Atingimento Quantidade Profissional =
+DIVIDE([Número de Vendas], [Meta Quantidade Profissional])
+
+
+-- GRUPO DE SERVIÇO
+
+% Atingimento Valor Grupo =
+DIVIDE([Valor Bruto de Itens], [Meta Valor Produto])
+
+% Atingimento Quantidade Grupo =
+DIVIDE([Quantidade de Itens], [Meta Quantidade Produto])
+
+
+-- SERVIÇO
+
+% Atingimento Valor Serviço =
+DIVIDE([Valor Bruto de Itens], [Meta Valor Serviço])
+
+% Atingimento Quantidade Serviço =
+DIVIDE([Quantidade de Itens], [Meta Quantidade Serviço])
