@@ -1,0 +1,45 @@
+-- ==================================================
+-- F01-17 | Medidas de exibição da tabela de serviços
+-- Projeto: Painel Aurora - Fase 1
+-- Responsável: Steph
+-- Tabela no Power BI: _Medidas
+--
+-- Finalidade: apresentar "sem meta" quando não
+-- existe uma meta para determinado serviço.
+-- Estas medidas retornam texto e são utilizadas
+-- exclusivamente na apresentação dos dados.
+--
+-- A formatação condicional foi configurada
+-- manualmente no Power BI, sem medidas DAX de cor.
+
+
+Exibição Meta Valor Serviço =
+IF(
+    ISBLANK([Meta Valor Serviço]),
+    "sem meta",
+    FORMAT([Meta Valor Serviço], "R$ #,##0.00", "pt-BR")
+)
+
+
+Exibição Meta Quantidade Serviço =
+IF(
+    ISBLANK([Meta Quantidade Serviço]),
+    "sem meta",
+    FORMAT([Meta Quantidade Serviço], "#,##0", "pt-BR")
+)
+
+
+Exibição % Valor Serviço =
+IF(
+    ISBLANK([Meta Valor Serviço]) || [Meta Valor Serviço] = 0,
+    "sem meta",
+    FORMAT([% Atingimento Valor Serviço], "0.0%", "pt-BR")
+)
+
+
+Exibição % Quantidade Serviço =
+IF(
+    ISBLANK([Meta Quantidade Serviço]) || [Meta Quantidade Serviço] = 0,
+    "sem meta",
+    FORMAT([% Atingimento Quantidade Serviço], "0.0%", "pt-BR")
+)
